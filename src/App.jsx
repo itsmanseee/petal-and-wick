@@ -1,33 +1,58 @@
 import { useState, useEffect } from "react";
 
-/* ── Unsplash free photo URLs (no attribution required) ── */
+/* ── Perfectly themed Unsplash free photos ─────────────────────────── */
 const U = id => `https://images.unsplash.com/photo-${id}?w=600&q=80&auto=format&fit=crop`;
 
 const PRODUCTS = [
-  { id:1,  name:"Rose Petal Candle",       cat:"candles", price:24, img:U("1601479604588-68d9e6d386b5"), badge:"Best Seller", rating:5, reviews:42, scent:"Fresh roses & amber" },
-  { id:2,  name:"Sunflower Garden Candle", cat:"candles", price:22, img:U("1572726729207-a78d6feb18d7"),                      rating:5, reviews:31, scent:"Summer fields & honey" },
-  { id:3,  name:"Coffee Morning Candle",   cat:"candles", price:26, img:U("1603006905003-be475563bc59"), badge:"New",          rating:4, reviews:28, scent:"Espresso & warm vanilla" },
-  { id:4,  name:"Ocean Seashells Candle",  cat:"candles", price:22, img:U("1643122966676-29e8597257f7"),                      rating:5, reviews:67, scent:"Sea salt & driftwood" },
-  { id:5,  name:"Koi Fish Pond Candle",    cat:"candles", price:28, img:U("1561212856-44e9bae482aa"),   badge:"Limited",      rating:5, reviews:45, scent:"Lotus blossom & water" },
-  { id:6,  name:"Lavender Breeze Candle",  cat:"candles", price:20, img:U("1612293905607-b003de9e54fb"),                      rating:5, reviews:38, scent:"Lavender & chamomile" },
-  { id:7,  name:"Vanilla Cloud Candle",    cat:"candles", price:24, img:U("1601922046210-41e129a3e64a"),                      rating:5, reviews:52, scent:"Vanilla bean & sandalwood" },
-  { id:8,  name:"Honey Oat Soap Bar",      cat:"soaps",   price:9,  img:U("1584305574647-0cc949a2bb9f"), badge:"Popular",     rating:5, reviews:67, scent:"Oat, honey & shea" },
-  { id:9,  name:"Wildflower Soap Set",     cat:"soaps",   price:24, img:U("1585145868057-135bf14b0503"),                      rating:5, reviews:45, scent:"Wildflower meadow · 3-bar set" },
-  { id:10, name:"Citrus Burst Soap",       cat:"soaps",   price:11, img:U("1661450159193-633134194753"),                      rating:4, reviews:22, scent:"Citrus & ginger" },
+  /* Candles — each photo matches the scent theme */
+  { id:1,  name:"Rose Petal Candle",       cat:"candles", price:24,
+    img:U("1697904725271-4c9ea6dd22c8"),   // pink roses + candle on windowsill
+    badge:"Best Seller", rating:5, reviews:42, scent:"Fresh roses & amber" },
+  { id:2,  name:"Sunflower Garden Candle", cat:"candles", price:22,
+    img:U("1564682474294-231196774b2c"),   // sunflower close-up
+    rating:5, reviews:31, scent:"Summer fields & honey" },
+  { id:3,  name:"Coffee Morning Candle",   cat:"candles", price:26,
+    img:U("1589830802010-c2c25d784842"),   // brown coffee beans close-up
+    badge:"New", rating:4, reviews:28, scent:"Espresso & warm vanilla" },
+  { id:4,  name:"Ocean Seashells Candle",  cat:"candles", price:22,
+    img:U("1645618988993-f5ac73b5028a"),   // starfish & shells on white
+    rating:5, reviews:67, scent:"Sea salt & driftwood" },
+  { id:5,  name:"Koi Fish Pond Candle",    cat:"candles", price:28,
+    img:U("1684221805308-7e5051411114"),   // colourful koi fish in pond
+    badge:"Limited", rating:5, reviews:45, scent:"Lotus blossom & water" },
+  { id:6,  name:"Lavender Breeze Candle",  cat:"candles", price:20,
+    img:U("1497145297841-e4c3e16594f3"),   // lavender flowers close-up
+    rating:5, reviews:38, scent:"Lavender & chamomile" },
+  { id:7,  name:"Vanilla Cloud Candle",    cat:"candles", price:24,
+    img:U("1605329628227-efbb235cffda"),   // vanilla bean & cream
+    rating:5, reviews:52, scent:"Vanilla bean & sandalwood" },
+
+  /* Soaps — each photo matches the soap theme */
+  { id:8,  name:"Honey Oat Soap Bar",      cat:"soaps",   price:9,
+    img:U("1542038335240-86aea625b913"),   // handmade stacked soap bars
+    badge:"Popular", rating:5, reviews:67, scent:"Oat, honey & shea" },
+  { id:9,  name:"Wildflower Soap Set",     cat:"soaps",   price:24,
+    img:U("1546552768-9e3a94b38a59"),      // assorted artisan soap bars
+    rating:5, reviews:45, scent:"Wildflower meadow · 3-bar set" },
+  { id:10, name:"Citrus Burst Soap",       cat:"soaps",   price:11,
+    img:U("1582287086947-1fd0fdac5cc9"),   // sliced lemon on white
+    rating:4, reviews:22, scent:"Citrus & ginger" },
 ];
 
 const REVIEWS = [
   { name:"Sarah M.",   rating:5, text:"I ordered the rose candle as a gift and my friend absolutely loved it! The scent is heavenly and the packaging is so beautiful.", product:"Rose Petal Candle",      initials:"SM", color:"#F9D5D3" },
   { name:"Emma K.",    rating:5, text:"The honey oat soap bars are so gentle on my skin. I've repurchased them three times already — I genuinely can't imagine using anything else!", product:"Honey Oat Soap Bar",     initials:"EK", color:"#FFD4B2" },
-  { name:"Jessica T.", rating:5, text:"The koi fish pond candle is absolutely gorgeous. The scent fills my entire room and the illustration on the box is stunning.",  product:"Koi Fish Pond Candle",  initials:"JT", color:"#C8DDD1" },
+  { name:"Jessica T.", rating:5, text:"The koi fish pond candle is absolutely gorgeous. The scent fills my entire room and I love looking at the beautiful koi imagery.",  product:"Koi Fish Pond Candle",  initials:"JT", color:"#C8DDD1" },
   { name:"Lily R.",    rating:5, text:"Every single product feels so carefully handcrafted. You can truly feel the love in each item. My whole apartment smells amazing!", product:"Lavender Breeze Candle",initials:"LR", color:"#EAD7F5" },
   { name:"Olivia P.",  rating:5, text:"Ordered the wildflower soap set for my mum's birthday — she cried happy tears! This is absolutely the best shop I've discovered.", product:"Wildflower Soap Set",   initials:"OP", color:"#C8DDD1" },
 ];
 
 const CATS = ["all","candles","soaps"];
 const CAT_LABEL = { all:"✨ All", candles:"🕯️ Candles", soaps:"🧼 Soaps" };
-const HERO_IDS  = [1, 4, 6, 7];
-const ABOUT_IMG = U("1528351655744-27cc30462816");
+const HERO_IDS  = [1, 2, 6, 7]; // rose, sunflower, lavender, vanilla
+
+/* ── About section: artisan candle-making photo ─── */
+const ABOUT_IMG = U("1528351655744-27cc30462816"); // warm tea-light on wood
 
 function StarRating({ rating, size=14 }) {
   return (
@@ -293,7 +318,7 @@ export default function App() {
         <div className="container about-inner">
           <div className="about-visual">
             <div className="about-illo-wrap">
-              <img src={ABOUT_IMG} alt="Handcrafted candles" style={{width:"100%",height:"100%",objectFit:"cover"}} loading="lazy"/>
+              <img src={ABOUT_IMG} alt="Handcrafted candles in our studio" style={{width:"100%",height:"100%",objectFit:"cover"}} loading="lazy"/>
             </div>
             <div className="about-badge">
               <span className="about-badge-icon">🕯️</span>
