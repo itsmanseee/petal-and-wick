@@ -1,23 +1,19 @@
-import { useState, useEffect, useRef } from "react";
-import RoseCandle from "./candles/RoseCandle";
-import SunflowerCandle from "./candles/SunflowerCandle";
-import CoffeeCandle from "./candles/CoffeeCandle";
-import SeashellsCandle from "./candles/SeashellsCandle";
-import KoiFishPond from "./candles/KoiFishPond";
-import LavenderCandle from "./candles/LavenderCandle";
-import VanillaCloud from "./candles/VanillaCloud";
+import { useState, useEffect } from "react";
+
+/* ── Unsplash free photo URLs (no attribution required) ── */
+const U = id => `https://images.unsplash.com/photo-${id}?w=600&q=80&auto=format&fit=crop`;
 
 const PRODUCTS = [
-  { id:1,  name:"Rose Petal Candle",       cat:"candles", price:24, Illo:RoseCandle,      badge:"Best Seller", rating:5, reviews:42, scent:"Fresh roses & amber" },
-  { id:2,  name:"Sunflower Garden Candle", cat:"candles", price:22, Illo:SunflowerCandle,                      rating:5, reviews:31, scent:"Summer fields & honey" },
-  { id:3,  name:"Coffee Morning Candle",   cat:"candles", price:26, Illo:CoffeeCandle,    badge:"New",         rating:4, reviews:28, scent:"Espresso & warm vanilla" },
-  { id:4,  name:"Ocean Seashells Candle",  cat:"candles", price:22, Illo:SeashellsCandle,                      rating:5, reviews:67, scent:"Sea salt & driftwood" },
-  { id:5,  name:"Koi Fish Pond Candle",    cat:"candles", price:28, Illo:KoiFishPond,     badge:"Limited",     rating:5, reviews:45, scent:"Lotus blossom & water" },
-  { id:6,  name:"Lavender Breeze Candle",  cat:"candles", price:20, Illo:LavenderCandle,                       rating:5, reviews:38, scent:"Lavender & chamomile" },
-  { id:7,  name:"Vanilla Cloud Candle",    cat:"candles", price:24, Illo:VanillaCloud,                         rating:5, reviews:52, scent:"Vanilla bean & sandalwood" },
-  { id:8,  name:"Honey Oat Soap Bar",      cat:"soaps",   price:9,  bg:["#FDE8C4","#F4BE7A"], emoji:"🧼", badge:"Popular", rating:5, reviews:67, scent:"Oat, honey & shea" },
-  { id:9,  name:"Wildflower Soap Set",     cat:"soaps",   price:24, bg:["#C8DDD1","#7BAFA3"], emoji:"🌸",             rating:5, reviews:45, scent:"Wildflower meadow · 3-bar set" },
-  { id:10, name:"Citrus Burst Soap",       cat:"soaps",   price:11, bg:["#FFF3A3","#FFD4B2"], emoji:"🍊",             rating:4, reviews:22, scent:"Citrus & ginger" },
+  { id:1,  name:"Rose Petal Candle",       cat:"candles", price:24, img:U("1601479604588-68d9e6d386b5"), badge:"Best Seller", rating:5, reviews:42, scent:"Fresh roses & amber" },
+  { id:2,  name:"Sunflower Garden Candle", cat:"candles", price:22, img:U("1572726729207-a78d6feb18d7"),                      rating:5, reviews:31, scent:"Summer fields & honey" },
+  { id:3,  name:"Coffee Morning Candle",   cat:"candles", price:26, img:U("1603006905003-be475563bc59"), badge:"New",          rating:4, reviews:28, scent:"Espresso & warm vanilla" },
+  { id:4,  name:"Ocean Seashells Candle",  cat:"candles", price:22, img:U("1643122966676-29e8597257f7"),                      rating:5, reviews:67, scent:"Sea salt & driftwood" },
+  { id:5,  name:"Koi Fish Pond Candle",    cat:"candles", price:28, img:U("1561212856-44e9bae482aa"),   badge:"Limited",      rating:5, reviews:45, scent:"Lotus blossom & water" },
+  { id:6,  name:"Lavender Breeze Candle",  cat:"candles", price:20, img:U("1612293905607-b003de9e54fb"),                      rating:5, reviews:38, scent:"Lavender & chamomile" },
+  { id:7,  name:"Vanilla Cloud Candle",    cat:"candles", price:24, img:U("1601922046210-41e129a3e64a"),                      rating:5, reviews:52, scent:"Vanilla bean & sandalwood" },
+  { id:8,  name:"Honey Oat Soap Bar",      cat:"soaps",   price:9,  img:U("1584305574647-0cc949a2bb9f"), badge:"Popular",     rating:5, reviews:67, scent:"Oat, honey & shea" },
+  { id:9,  name:"Wildflower Soap Set",     cat:"soaps",   price:24, img:U("1585145868057-135bf14b0503"),                      rating:5, reviews:45, scent:"Wildflower meadow · 3-bar set" },
+  { id:10, name:"Citrus Burst Soap",       cat:"soaps",   price:11, img:U("1661450159193-633134194753"),                      rating:4, reviews:22, scent:"Citrus & ginger" },
 ];
 
 const REVIEWS = [
@@ -30,7 +26,8 @@ const REVIEWS = [
 
 const CATS = ["all","candles","soaps"];
 const CAT_LABEL = { all:"✨ All", candles:"🕯️ Candles", soaps:"🧼 Soaps" };
-const HERO_IDS = [1,4,6,7];
+const HERO_IDS  = [1, 4, 6, 7];
+const ABOUT_IMG = U("1528351655744-27cc30462816");
 
 function StarRating({ rating, size=14 }) {
   return (
@@ -48,7 +45,7 @@ function StarRating({ rating, size=14 }) {
 function Flower({ size=60, color="#F9D5D3", style:s={} }) {
   const inner = color==="#F9D5D3"?"#E07B85":color==="#EAD7F5"?"#9370C0":"#7BAFA3";
   return (
-    <svg width={size} height={size} viewBox="0 0 100 100" style={{opacity:.45,...s}} aria-hidden="true">
+    <svg width={size} height={size} viewBox="0 0 100 100" style={{opacity:.4,...s}} aria-hidden="true">
       {[0,72,144,216,288].map((d,i)=>(
         <ellipse key={i} cx="50" cy="22" rx="13" ry="22" fill={color} transform={`rotate(${d} 50 50)`}/>
       ))}
@@ -59,18 +56,9 @@ function Flower({ size=60, color="#F9D5D3", style:s={} }) {
 
 function Sparkle({ size=22, color="#D4A853", style:s={} }) {
   return (
-    <svg width={size} height={size} viewBox="0 0 24 24" style={{opacity:.7,...s}} aria-hidden="true">
+    <svg width={size} height={size} viewBox="0 0 24 24" style={{opacity:.65,...s}} aria-hidden="true">
       <path d="M12 0L14 10L24 12L14 14L12 24L10 14L0 12L10 10Z" fill={color}/>
     </svg>
-  );
-}
-
-function SoapCard({ bg, emoji }) {
-  return (
-    <div style={{ width:"100%", height:"100%", background:`linear-gradient(135deg,${bg[0]},${bg[1]})`,
-      display:"flex", alignItems:"center", justifyContent:"center", fontSize:72 }}>
-      <span style={{ filter:"drop-shadow(0 4px 8px rgba(0,0,0,.12))" }}>{emoji}</span>
-    </div>
   );
 }
 
@@ -137,7 +125,7 @@ export default function App() {
                   {cart.map(item=>(
                     <div key={item.id} className="cart-item">
                       <div className="cart-thumb">
-                        {item.Illo ? <item.Illo/> : <SoapCard bg={item.bg} emoji={item.emoji}/>}
+                        <img src={item.img} alt={item.name} style={{width:"100%",height:"100%",objectFit:"cover"}} loading="lazy"/>
                       </div>
                       <div className="cart-item-info">
                         <p className="fw700 small">{item.name}</p>
@@ -235,7 +223,9 @@ export default function App() {
             {heroItems.map((p,i)=>(
               <div key={p.id} className={`hero-card rot-${i%2===0?"l":"r"} ${i>=2?"hero-card-low":""}`}
                 onClick={()=>addToCart(p)}>
-                <div className="hero-card-illo"><p.Illo/></div>
+                <div className="hero-card-illo">
+                  <img src={p.img} alt={p.name} style={{width:"100%",height:"100%",objectFit:"cover",borderRadius:12}} loading="eager"/>
+                </div>
                 <p className="hero-card-name">{p.name}</p>
                 <p className="hero-card-price">${p.price}</p>
               </div>
@@ -272,7 +262,7 @@ export default function App() {
               <article key={p.id} className={`product-card${hovered===p.id?" lifted":""}`}
                 onMouseEnter={()=>setHovered(p.id)} onMouseLeave={()=>setHovered(null)}>
                 <div className="product-illo">
-                  {p.Illo ? <p.Illo/> : <SoapCard bg={p.bg} emoji={p.emoji}/>}
+                  <img src={p.img} alt={p.name} style={{width:"100%",height:"100%",objectFit:"cover",display:"block"}} loading="lazy"/>
                   {p.badge && <span className="product-badge">{p.badge}</span>}
                   <button className="wish-btn"
                     onClick={()=>setWishlist(w=>w.includes(p.id)?w.filter(i=>i!==p.id):[...w,p.id])}
@@ -302,7 +292,9 @@ export default function App() {
       <section className="section about-section" id="about">
         <div className="container about-inner">
           <div className="about-visual">
-            <div className="about-illo-wrap"><LavenderCandle/></div>
+            <div className="about-illo-wrap">
+              <img src={ABOUT_IMG} alt="Handcrafted candles" style={{width:"100%",height:"100%",objectFit:"cover"}} loading="lazy"/>
+            </div>
             <div className="about-badge">
               <span className="about-badge-icon">🕯️</span>
               <div><p className="small mid">Handcrafting since</p><p className="fw700">2021 ✨</p></div>
