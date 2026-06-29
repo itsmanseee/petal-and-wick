@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 
 /* ── Photo URLs from your Unsplash links ────────────────────────────── */
 const U  = id => `https://images.unsplash.com/photo-${id}?w=600&q=80&auto=format&fit=crop`;
-const UP = id => `https://plus.unsplash.com/premium_photo-${id}?w=600&q=80&auto=format&fit=crop`;
 
 const PRODUCTS = [
   {
@@ -41,7 +40,7 @@ const PRODUCTS = [
     id: 5,
     name: "Bubble Cloud Candle",
     cat: "candles", price: 32,
-    img: UP("1681412205355-93299347bc2e"), // your link 5 (premium)
+    img: U("1601747779082-77a8fe377ecc"),  // white candles, free
     badge: "Limited", rating: 5, reviews: 29,
     scent: "Cotton, white musk & sandalwood",
   },
