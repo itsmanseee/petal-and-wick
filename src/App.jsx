@@ -1,58 +1,61 @@
 import { useState, useEffect } from "react";
 
-/* ── Perfectly themed Unsplash free photos ─────────────────────────── */
-const U = id => `https://images.unsplash.com/photo-${id}?w=600&q=80&auto=format&fit=crop`;
+/* ── Photo URLs from your Unsplash links ────────────────────────────── */
+const U  = id => `https://images.unsplash.com/photo-${id}?w=600&q=80&auto=format&fit=crop`;
+const UP = id => `https://plus.unsplash.com/premium_photo-${id}?w=600&q=80&auto=format&fit=crop`;
 
 const PRODUCTS = [
-  /* Candles — each photo matches the scent theme */
-  { id:1,  name:"Rose Petal Candle",       cat:"candles", price:24,
-    img:U("1697904725271-4c9ea6dd22c8"),   // pink roses + candle on windowsill
-    badge:"Best Seller", rating:5, reviews:42, scent:"Fresh roses & amber" },
-  { id:2,  name:"Sunflower Garden Candle", cat:"candles", price:22,
-    img:U("1564682474294-231196774b2c"),   // sunflower close-up
-    rating:5, reviews:31, scent:"Summer fields & honey" },
-  { id:3,  name:"Coffee Morning Candle",   cat:"candles", price:26,
-    img:U("1589830802010-c2c25d784842"),   // brown coffee beans close-up
-    badge:"New", rating:4, reviews:28, scent:"Espresso & warm vanilla" },
-  { id:4,  name:"Ocean Seashells Candle",  cat:"candles", price:22,
-    img:U("1645618988993-f5ac73b5028a"),   // starfish & shells on white
-    rating:5, reviews:67, scent:"Sea salt & driftwood" },
-  { id:5,  name:"Koi Fish Pond Candle",    cat:"candles", price:28,
-    img:U("1684221805308-7e5051411114"),   // colourful koi fish in pond
-    badge:"Limited", rating:5, reviews:45, scent:"Lotus blossom & water" },
-  { id:6,  name:"Lavender Breeze Candle",  cat:"candles", price:20,
-    img:U("1497145297841-e4c3e16594f3"),   // lavender flowers close-up
-    rating:5, reviews:38, scent:"Lavender & chamomile" },
-  { id:7,  name:"Vanilla Cloud Candle",    cat:"candles", price:24,
-    img:U("1605329628227-efbb235cffda"),   // vanilla bean & cream
-    rating:5, reviews:52, scent:"Vanilla bean & sandalwood" },
-
-  /* Soaps — each photo matches the soap theme */
-  { id:8,  name:"Honey Oat Soap Bar",      cat:"soaps",   price:9,
-    img:U("1542038335240-86aea625b913"),   // handmade stacked soap bars
-    badge:"Popular", rating:5, reviews:67, scent:"Oat, honey & shea" },
-  { id:9,  name:"Wildflower Soap Set",     cat:"soaps",   price:24,
-    img:U("1546552768-9e3a94b38a59"),      // assorted artisan soap bars
-    rating:5, reviews:45, scent:"Wildflower meadow · 3-bar set" },
-  { id:10, name:"Citrus Burst Soap",       cat:"soaps",   price:11,
-    img:U("1582287086947-1fd0fdac5cc9"),   // sliced lemon on white
-    rating:4, reviews:22, scent:"Citrus & ginger" },
+  {
+    id: 1,
+    name: "Crystal Petal Candle",
+    cat: "candles", price: 28,
+    img: U("1618324359017-5452b2f4eec9"),   // your link 1
+    badge: "Best Seller", rating: 5, reviews: 84,
+    scent: "Rose quartz, botanicals & essential oils",
+  },
+  {
+    id: 2,
+    name: "Sunflower Garden Candle",
+    cat: "candles", price: 24,
+    img: U("1698129851327-a140cfad05b8"),   // your link 2
+    rating: 5, reviews: 61,
+    scent: "Summer honey & wildflower",
+  },
+  {
+    id: 3,
+    name: "Matcha Dream Candle",
+    cat: "candles", price: 26,
+    img: U("1720156351990-67afa28e4aca"),   // your link 3
+    badge: "New", rating: 5, reviews: 38,
+    scent: "Green tea, cedar & fresh linen",
+  },
+  {
+    id: 4,
+    name: "Coffee Morning Candle",
+    cat: "candles", price: 26,
+    img: U("1664431439036-5e3675620231"),   // your link 4
+    rating: 4, reviews: 52,
+    scent: "Espresso, dark chocolate & vanilla",
+  },
+  {
+    id: 5,
+    name: "Bubble Cloud Candle",
+    cat: "candles", price: 32,
+    img: UP("1681412205355-93299347bc2e"), // your link 5 (premium)
+    badge: "Limited", rating: 5, reviews: 29,
+    scent: "Cotton, white musk & sandalwood",
+  },
 ];
 
 const REVIEWS = [
-  { name:"Sarah M.",   rating:5, text:"I ordered the rose candle as a gift and my friend absolutely loved it! The scent is heavenly and the packaging is so beautiful.", product:"Rose Petal Candle",      initials:"SM", color:"#F9D5D3" },
-  { name:"Emma K.",    rating:5, text:"The honey oat soap bars are so gentle on my skin. I've repurchased them three times already — I genuinely can't imagine using anything else!", product:"Honey Oat Soap Bar",     initials:"EK", color:"#FFD4B2" },
-  { name:"Jessica T.", rating:5, text:"The koi fish pond candle is absolutely gorgeous. The scent fills my entire room and I love looking at the beautiful koi imagery.",  product:"Koi Fish Pond Candle",  initials:"JT", color:"#C8DDD1" },
-  { name:"Lily R.",    rating:5, text:"Every single product feels so carefully handcrafted. You can truly feel the love in each item. My whole apartment smells amazing!", product:"Lavender Breeze Candle",initials:"LR", color:"#EAD7F5" },
-  { name:"Olivia P.",  rating:5, text:"Ordered the wildflower soap set for my mum's birthday — she cried happy tears! This is absolutely the best shop I've discovered.", product:"Wildflower Soap Set",   initials:"OP", color:"#C8DDD1" },
+  { name:"Sarah M.",   rating:5, text:"I ordered the crystal petal candle as a gift and it blew us away — the scent is unreal and it looks like a piece of art. Will 100% be back!", product:"Crystal Petal Candle",    initials:"SM", color:"#F9D5D3" },
+  { name:"Emma K.",    rating:5, text:"The matcha candle is so calming. I light it every evening while reading and it completely transforms the room. Absolutely obsessed.", product:"Matcha Dream Candle",       initials:"EK", color:"#C8DDD1" },
+  { name:"Jessica T.", rating:5, text:"The bubble cloud candle is the most beautiful candle I've ever owned. The scent is soft and dreamy — exactly what I needed.", product:"Bubble Cloud Candle",        initials:"JT", color:"#EAD7F5" },
+  { name:"Lily R.",    rating:5, text:"Coffee morning candle wakes me up better than my actual coffee! The scent is warm, rich, and cosy. My whole home smells amazing.", product:"Coffee Morning Candle",      initials:"LR", color:"#FFD4B2" },
+  { name:"Olivia P.",  rating:5, text:"Ordered the sunflower garden candle on a whim and it's become my all-time favourite. Bright, happy, and the burn time is incredible.", product:"Sunflower Garden Candle", initials:"OP", color:"#FDE8C4" },
 ];
 
-const CATS = ["all","candles","soaps"];
-const CAT_LABEL = { all:"✨ All", candles:"🕯️ Candles", soaps:"🧼 Soaps" };
-const HERO_IDS  = [1, 2, 6, 7]; // rose, sunflower, lavender, vanilla
-
-/* ── About section: artisan candle-making photo ─── */
-const ABOUT_IMG = U("1528351655744-27cc30462816"); // warm tea-light on wood
+const ABOUT_IMG = U("1528351655744-27cc30462816");
 
 function StarRating({ rating, size=14 }) {
   return (
@@ -91,7 +94,6 @@ export default function App() {
   const [cart,       setCart]      = useState([]);
   const [cartOpen,   setCartOpen]  = useState(false);
   const [mobileMenu, setMobile]    = useState(false);
-  const [activeCat,  setCat]       = useState("all");
   const [reviewIdx,  setReview]    = useState(0);
   const [wishlist,   setWishlist]  = useState([]);
   const [toast,      setToast]     = useState(null);
@@ -115,14 +117,12 @@ export default function App() {
       return ex ? prev.map(i=>i.id===p.id?{...i,qty:i.qty+1}:i) : [...prev,{...p,qty:1}];
     });
     setToast(`${p.name} added! 🛒`);
-    setTimeout(()=>setToast(null),2500);
+    setTimeout(()=>setToast(null), 2500);
   };
   const updQty = (id,d) => setCart(prev=>prev.map(i=>i.id===id?{...i,qty:i.qty+d}:i).filter(i=>i.qty>0));
 
-  const cartTotal = cart.reduce((s,i)=>s+i.price*i.qty,0);
-  const cartCount = cart.reduce((s,i)=>s+i.qty,0);
-  const filtered  = activeCat==="all" ? PRODUCTS : PRODUCTS.filter(p=>p.cat===activeCat);
-  const heroItems = PRODUCTS.filter(p=>HERO_IDS.includes(p.id));
+  const cartTotal = cart.reduce((s,i)=>s+i.price*i.qty, 0);
+  const cartCount = cart.reduce((s,i)=>s+i.qty, 0);
 
   return (
     <div className="app">
@@ -167,7 +167,7 @@ export default function App() {
                 </div>
                 <div className="cart-footer">
                   <div className="cart-total">
-                    <span className="mid">Subtotal ({cartCount} items)</span>
+                    <span className="mid">Subtotal ({cartCount} item{cartCount!==1?"s":""})</span>
                     <span className="price-lg">${cartTotal.toFixed(2)}</span>
                   </div>
                   <button className="btn-primary full-width">Checkout ✨</button>
@@ -185,7 +185,7 @@ export default function App() {
           <div className="mobile-nav" onClick={e=>e.stopPropagation()}>
             <button className="icon-btn mb-lg" onClick={()=>setMobile(false)}>✕</button>
             <nav className="mobile-nav-links">
-              {["Shop","Candles","Soaps","About"].map(n=>(
+              {["Shop","About"].map(n=>(
                 <a key={n} href={`#${n.toLowerCase()}`} className="mobile-nav-link" onClick={()=>setMobile(false)}>{n}</a>
               ))}
             </nav>
@@ -201,7 +201,7 @@ export default function App() {
           </button>
           <a href="#" className="logo">🌸 Petal &amp; Wick</a>
           <nav className="desktop-nav">
-            {["Shop","Candles","Soaps","About"].map(n=>(
+            {["Shop","About"].map(n=>(
               <a key={n} href={`#${n.toLowerCase()}`} className="nav-link">{n}</a>
             ))}
           </nav>
@@ -217,7 +217,7 @@ export default function App() {
         <div className="marquee">
           {[...Array(4)].map((_,i)=>(
             <span key={i} className="marquee-text">
-              ✨ Free shipping on orders over $35 &nbsp;·&nbsp; 🌸 New arrivals every Friday &nbsp;·&nbsp; 🕯️ Use code PETAL10 for 10% off &nbsp;·&nbsp; 🌿 100% natural &amp; organic &nbsp;&nbsp;&nbsp;
+              ✨ Free shipping on orders over $35 &nbsp;·&nbsp; 🌸 New arrivals every Friday &nbsp;·&nbsp; 🕯️ Use code PETAL10 for 10% off &nbsp;·&nbsp; 🌿 100% natural soy wax &nbsp;&nbsp;&nbsp;
             </span>
           ))}
         </div>
@@ -229,27 +229,33 @@ export default function App() {
         <Flower size={70}  color="#EAD7F5" style={{ position:"absolute", bottom:50, left:30 }}/>
         <Sparkle size={30} color="#D4A853" style={{ position:"absolute", top:70, left:"43%", transform:"rotate(18deg)" }}/>
         <Sparkle size={18} color="#E8929A" style={{ position:"absolute", bottom:110, right:"24%" }}/>
+
         <div className="container hero-inner">
           <div className="hero-text">
             <span className="pill">✨ Handcrafted with Love</span>
             <h1 className="hero-heading">Your home deserves<br/>a little <em className="accent-rose">magic ✨</em></h1>
-            <p className="hero-sub">Artisanal candles, handmade soaps &amp; botanical art — crafted in small batches with organic ingredients and a whole lot of love.</p>
+            <p className="hero-sub">Artisanal soy candles crafted in small batches with organic ingredients, botanical petals and a whole lot of love.</p>
             <div className="hero-ctas">
               <a href="#products" className="btn-primary">Shop Now ✨</a>
               <a href="#about" className="btn-outline">Our Story</a>
             </div>
             <div className="trust-badges">
-              {[["🌿","100% Natural"],["♻️","Eco Packaging"],["💝","Handcrafted"]].map(([e,l])=>(
+              {[["🌿","100% Soy Wax"],["♻️","Eco Packaging"],["💝","Handcrafted"]].map(([e,l])=>(
                 <span key={l} className="trust-badge"><span>{e}</span>{l}</span>
               ))}
             </div>
           </div>
+
+          {/* Hero cards — all 5 candles */}
           <div className="hero-cards" aria-hidden="true">
-            {heroItems.map((p,i)=>(
-              <div key={p.id} className={`hero-card rot-${i%2===0?"l":"r"} ${i>=2?"hero-card-low":""}`}
+            {PRODUCTS.map((p,i)=>(
+              <div key={p.id}
+                className={`hero-card ${i%2===0?"rot-l":"rot-r"} ${i>=2?"hero-card-low":""}`}
                 onClick={()=>addToCart(p)}>
                 <div className="hero-card-illo">
-                  <img src={p.img} alt={p.name} style={{width:"100%",height:"100%",objectFit:"cover",borderRadius:12}} loading="eager"/>
+                  <img src={p.img} alt={p.name}
+                    style={{width:"100%",height:"100%",objectFit:"cover",borderRadius:12}}
+                    loading="eager"/>
                 </div>
                 <p className="hero-card-name">{p.name}</p>
                 <p className="hero-card-price">${p.price}</p>
@@ -261,7 +267,7 @@ export default function App() {
 
       {/* Stats */}
       <div className="stats-bar">
-        {[["500+","Happy Customers"],["100%","Natural Ingredients"],["3–5 Days","Avg. Shipping"],["200+","5-Star Reviews"]].map(([n,l])=>(
+        {[["500+","Happy Customers"],["100%","Natural Soy Wax"],["3–5 Days","Avg. Shipping"],["200+","5-Star Reviews"]].map(([n,l])=>(
           <div key={l} className="stat">
             <span className="stat-number">{n}</span>
             <span className="stat-label">{l}</span>
@@ -274,20 +280,19 @@ export default function App() {
         <div className="container">
           <p className="section-eyebrow">Our Collection</p>
           <h2 className="section-heading">Shop with love 🌸</h2>
-          <p className="section-sub">Each item is made in small batches — because quality always matters more than quantity.</p>
-          <div className="cat-tabs">
-            {CATS.map(cat=>(
-              <button key={cat} className={`cat-tab${activeCat===cat?" active":""}`} onClick={()=>setCat(cat)}>
-                {CAT_LABEL[cat]}
-              </button>
-            ))}
-          </div>
+          <p className="section-sub">Each candle is poured in small batches — because quality always matters more than quantity.</p>
+
           <div className="products-grid">
-            {filtered.map(p=>(
-              <article key={p.id} className={`product-card${hovered===p.id?" lifted":""}`}
-                onMouseEnter={()=>setHovered(p.id)} onMouseLeave={()=>setHovered(null)}>
+            {PRODUCTS.map(p=>(
+              <article key={p.id}
+                className={`product-card${hovered===p.id?" lifted":""}`}
+                onMouseEnter={()=>setHovered(p.id)}
+                onMouseLeave={()=>setHovered(null)}>
+
                 <div className="product-illo">
-                  <img src={p.img} alt={p.name} style={{width:"100%",height:"100%",objectFit:"cover",display:"block"}} loading="lazy"/>
+                  <img src={p.img} alt={p.name}
+                    style={{width:"100%",height:"100%",objectFit:"cover",display:"block"}}
+                    loading="lazy"/>
                   {p.badge && <span className="product-badge">{p.badge}</span>}
                   <button className="wish-btn"
                     onClick={()=>setWishlist(w=>w.includes(p.id)?w.filter(i=>i!==p.id):[...w,p.id])}
@@ -295,16 +300,20 @@ export default function App() {
                     {wishlist.includes(p.id)?"❤️":"🤍"}
                   </button>
                 </div>
+
                 <div className="product-body">
-                  <p className="product-cat">{p.cat==="soaps"?"Handmade Soap":"Soy Candle"}</p>
+                  <p className="product-cat">Soy Candle</p>
                   <h3 className="product-name">{p.name}</h3>
                   <p className="product-scent">{p.scent}</p>
                   <div className="rating-row">
-                    <StarRating rating={p.rating} size={13}/><span className="mid small">({p.reviews})</span>
+                    <StarRating rating={p.rating} size={13}/>
+                    <span className="mid small">({p.reviews})</span>
                   </div>
                   <div className="price-row">
                     <span className="price">${p.price.toFixed(2)}</span>
-                    <button className={`add-btn${hovered===p.id?" active":""}`} onClick={()=>addToCart(p)}>+ Cart</button>
+                    <button
+                      className={`add-btn${hovered===p.id?" active":""}`}
+                      onClick={()=>addToCart(p)}>+ Cart</button>
                   </div>
                 </div>
               </article>
@@ -318,20 +327,22 @@ export default function App() {
         <div className="container about-inner">
           <div className="about-visual">
             <div className="about-illo-wrap">
-              <img src={ABOUT_IMG} alt="Handcrafted candles in our studio" style={{width:"100%",height:"100%",objectFit:"cover"}} loading="lazy"/>
+              <img src={ABOUT_IMG} alt="Candle making in our studio"
+                style={{width:"100%",height:"100%",objectFit:"cover"}} loading="lazy"/>
             </div>
             <div className="about-badge">
               <span className="about-badge-icon">🕯️</span>
               <div><p className="small mid">Handcrafting since</p><p className="fw700">2021 ✨</p></div>
             </div>
           </div>
+
           <div className="about-text">
             <p className="section-eyebrow">Our Story</p>
             <h2 className="section-heading">Made with care,<br/><em className="accent-rose">crafted with heart</em></h2>
             <p className="body-text">Petal &amp; Wick started in a tiny kitchen in 2021. What began as a passion for creating beautiful, natural things grew into something we're incredibly proud of.</p>
-            <p className="body-text mt-sm">Every candle and every soap bar is handmade — never mass produced. We source organic ingredients and use eco-friendly packaging because beauty shouldn't cost the earth.</p>
+            <p className="body-text mt-sm">Every candle is poured by hand — never mass produced. We use 100% natural soy wax, cotton wicks and premium fragrance oils because your home deserves the best.</p>
             <div className="about-pillars">
-              {[["🌿","Organic\nIngredients"],["♻️","Zero Waste\nPackaging"],["💝","Small Batch\nHandmade"]].map(([e,l])=>(
+              {[["🌿","100% Soy\nWax"],["♻️","Zero Waste\nPackaging"],["💝","Small Batch\nHandmade"]].map(([e,l])=>(
                 <div key={l} className="pillar">
                   <span className="pillar-icon">{e}</span>
                   <p className="pillar-label">{l}</p>
@@ -352,7 +363,8 @@ export default function App() {
             <div className="review-stars"><StarRating rating={REVIEWS[reviewIdx].rating} size={20}/></div>
             <blockquote className="review-text">"{REVIEWS[reviewIdx].text}"</blockquote>
             <div className="reviewer">
-              <div className="reviewer-avatar" style={{background:`linear-gradient(135deg,${REVIEWS[reviewIdx].color},#F9D5D3)`}}>
+              <div className="reviewer-avatar"
+                style={{background:`linear-gradient(135deg,${REVIEWS[reviewIdx].color},#F9D5D3)`}}>
                 {REVIEWS[reviewIdx].initials}
               </div>
               <div className="reviewer-info">
@@ -374,12 +386,15 @@ export default function App() {
         <div className="container" style={{maxWidth:560,textAlign:"center"}}>
           <p style={{fontSize:40,marginBottom:12}}>💌</p>
           <h2 className="section-heading">Join the Petal Club</h2>
-          <p className="body-text" style={{marginBottom:28}}>Get <strong>10% off</strong> your first order, early access to new arrivals &amp; cozy self-care tips.</p>
+          <p className="body-text" style={{marginBottom:28}}>
+            Get <strong>10% off</strong> your first order, early access to new drops &amp; cozy self-care tips.
+          </p>
           {subscribed ? (
             <div className="subscribe-success">💝 Welcome to the Petal Club! Check your inbox!</div>
           ):(
             <form className="subscribe-form" onSubmit={e=>{e.preventDefault();email.includes("@")&&setSub(true);}}>
-              <input type="email" placeholder="your@email.com" value={email} onChange={e=>setEmail(e.target.value)} className="subscribe-input" required/>
+              <input type="email" placeholder="your@email.com" value={email}
+                onChange={e=>setEmail(e.target.value)} className="subscribe-input" required/>
               <button type="submit" className="btn-primary">Subscribe ✨</button>
             </form>
           )}
@@ -396,7 +411,11 @@ export default function App() {
               {["📷","📌","🎵"].map((e,i)=><span key={i} className="social-icon">{e}</span>)}
             </div>
           </div>
-          {[["Shop",["Candles","Soaps","Gift Sets","New Arrivals"]],["Help",["Shipping Info","Returns","FAQ","Contact Us"]],["Connect",["Instagram","Pinterest","TikTok","Newsletter"]]].map(([title,items])=>(
+          {[
+            ["Shop",   ["Crystal Petal","Sunflower Garden","Matcha Dream","Coffee Morning","Bubble Cloud"]],
+            ["Help",   ["Shipping Info","Returns","FAQ","Contact Us"]],
+            ["Connect",["Instagram","Pinterest","TikTok","Newsletter"]],
+          ].map(([title,items])=>(
             <div key={title} className="footer-col">
               <h4 className="footer-col-title">{title}</h4>
               {items.map(item=><p key={item} className="footer-link">{item}</p>)}
@@ -405,7 +424,7 @@ export default function App() {
         </div>
         <div className="footer-bottom">
           <p>© 2025 Petal &amp; Wick. All rights reserved.</p>
-          <p>Made with 💝 · Natural &amp; Sustainable</p>
+          <p>Made with 💝 · 100% Natural Soy Wax</p>
         </div>
       </footer>
 
