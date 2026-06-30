@@ -1,14 +1,15 @@
 import { useState, useEffect } from "react";
 
-/* ── Photo URLs from your Unsplash links ────────────────────────────── */
-const U  = id => `https://images.unsplash.com/photo-${id}?w=600&q=80&auto=format&fit=crop`;
+/* ── Self-hosted product photos (fetched once via GitHub Actions,
+      committed to /public/photos — no external CDN dependency) ──────── */
+const PHOTO = name => `/petal-and-wick/photos/${name}.jpg`;
 
 const PRODUCTS = [
   {
     id: 1,
     name: "Crystal Petal Candle",
     cat: "candles", price: 28,
-    img: U("1618324359017-5452b2f4eec9"),   // your link 1
+    img: PHOTO("crystal-petal"),
     badge: "Best Seller", rating: 5, reviews: 84,
     scent: "Rose quartz, botanicals & essential oils",
   },
@@ -16,7 +17,7 @@ const PRODUCTS = [
     id: 2,
     name: "Sunflower Garden Candle",
     cat: "candles", price: 24,
-    img: U("1698129851327-a140cfad05b8"),   // your link 2
+    img: PHOTO("sunflower-garden"),
     rating: 5, reviews: 61,
     scent: "Summer honey & wildflower",
   },
@@ -24,7 +25,7 @@ const PRODUCTS = [
     id: 3,
     name: "Matcha Dream Candle",
     cat: "candles", price: 26,
-    img: U("1720156351990-67afa28e4aca"),   // your link 3
+    img: PHOTO("matcha-dream"),
     badge: "New", rating: 5, reviews: 38,
     scent: "Green tea, cedar & fresh linen",
   },
@@ -32,7 +33,7 @@ const PRODUCTS = [
     id: 4,
     name: "Coffee Morning Candle",
     cat: "candles", price: 26,
-    img: U("1664431439036-5e3675620231"),   // your link 4
+    img: PHOTO("coffee-morning"),
     rating: 4, reviews: 52,
     scent: "Espresso, dark chocolate & vanilla",
   },
@@ -40,7 +41,7 @@ const PRODUCTS = [
     id: 5,
     name: "Bubble Cloud Candle",
     cat: "candles", price: 32,
-    img: U("1601747779082-77a8fe377ecc"),  // white candles, free
+    img: PHOTO("bubble-cloud"),
     badge: "Limited", rating: 5, reviews: 29,
     scent: "Cotton, white musk & sandalwood",
   },
@@ -54,7 +55,7 @@ const REVIEWS = [
   { name:"Olivia P.",  rating:5, text:"Ordered the sunflower garden candle on a whim and it's become my all-time favourite. Bright, happy, and the burn time is incredible.", product:"Sunflower Garden Candle", initials:"OP", color:"#FDE8C4" },
 ];
 
-const ABOUT_IMG = U("1528351655744-27cc30462816");
+const ABOUT_IMG = PHOTO("about-studio");
 
 function StarRating({ rating, size=14 }) {
   return (
